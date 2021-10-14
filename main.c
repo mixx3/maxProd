@@ -1,10 +1,9 @@
 #include <stdio.h>
-#include <limits.h>
 #include <stdlib.h>
 
 int fastAlg(int array[], int n){
-    int product = INT_MIN, max1 = 0, max2 = 0, index1 = -1,
-    min1 = 0, min2 = 0, index2;
+    int max1 = 0, max2 = 0, index1 = -1,
+    min1 = 0, min2 = 0, index2 = -1;
     for (int i = 0; i < n; i++){
         if (array[i] > max1) {
             max1 = array[i];
@@ -23,31 +22,27 @@ int fastAlg(int array[], int n){
             min2 = array[i];
         }
     }
-    int productN = min1 * min2;
-    int productP = max1 * max2;
-    int product3 = max1 * min1;
-    if (productN >= productP && productN != 0){
-        return productN;
+    if (n == 2){
+        return array[0] * array[1];
     }
-    else if (productP >= productN && productP != 0){
-        return productP;
-    }
-    else if (n == 2){
-        return product3;
-    }
+    else return ((max1 * max2) >= (min1 * min2)) ? max1 * max2 : min1 * min2;
 }
-
 
 int main()
 {
     int n;
     scanf("%d", &n);
-    array = malloc(n * sizeof(array[0]));
-        if (!array) {printf("Allocation failed"); exit(1);}
+    if (n < 2) printf("Too few elements in array!");
+    else{
+        int* array = malloc(n * sizeof(array[0]));
+        if (!array) {printf("Allocation failed\n"); exit(1);}
         for (int j = 0; j < n; j++){
             scanf("%d", &array[j]);
-        }
-    printf("%d", fastAlg(array, n));
+        } 
+        printf("%d", fastAlg(array, n));
+        free(array);
+    }
     return 0;
 }
+
 
