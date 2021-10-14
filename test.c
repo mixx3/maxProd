@@ -37,15 +37,15 @@ int fastAlg(int array[], int n){
     }
     int productN = min1 * min2;
     int productP = max1 * max2;
-    int product3 = max1 * min1;
-    if (productN >= productP && productN != 0){
+    if (n == 2){
+        return array[0] * array[1];
+    }
+    
+    else if (productN >= productP){
         return productN;
     }
-    else if (productP >= productN && productP != 0){
+    else if (productP >= productN){
         return productP;
-    }
-    else if (n == 2){
-        return product3;
     }
 }
 
@@ -69,7 +69,9 @@ int main()
             } 
             printf("\n %d %d \n", myProduct, common);
         }
+        free(array);
     }
     
     return 0;
 }
+
